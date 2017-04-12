@@ -1,13 +1,48 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\widgets\ListView;
 
-$this->title = 'My Yii Application';
+
+
+$this->title = 'Smart & Social Teachers';
+//echo Yii::$app->controller->getRoute();
 ?>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+
+        
+            <?php /*=$this->render('/slide/view',['slide'=>$slide]);*/ ?>
+        
+        
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <i class="fa fa-th"></i><h3 class="box-title">ข่าวประชาสัมพันธ์</h3>
+                </div>
+                <div class="box-body">
+            <?php
+            echo ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemView' => '/articles/_item',
+                'itemOptions' => [
+                    'class' => 'col-sm-12 col-md-12',
+                ],
+                'layout' =>  '{items}',
+            ]);
+
+            ?>  
+            </div>
+            </div>
+
+    </div>
+</div>
+
+
+<!--
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <div class="jumbotron"> <?=common\components\languageSwitcher::Widget();?>
+        <h1><?php echo Yii::t('common', 'Congratulations!');?></h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
@@ -50,4 +85,4 @@ $this->title = 'My Yii Application';
         </div>
 
     </div>
-</div>
+</div>-->

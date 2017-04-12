@@ -2,11 +2,17 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Controller;
 use common\models\LoginForm;
+use yii\filters\VerbFilter;
 
+
+use backend\modules\articles\models\TbArticle;
+use backend\modules\articles\models\TbArticleSearch;
+
+use backend\modules\slide\models\TbSlide;
+use backend\modules\slide\models\TbSlideSearch;
 /**
  * Site controller
  */
@@ -53,24 +59,30 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel=  new TbArticleSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize = 6;
+        $dataProvider->sort->defaultOrder = ['art_id'=>'DESC'];
+        
+        
+        $tbSlide = new TbSlideSearch();
+        $slide = $tbSlide->search(Yii::$app->request->queryParams);
+        $slide->pagination->pageSize = 6;
+        $slide->sort->defaultOrder = ['slide_sort'=>'DESC'];
+        return $this->render('index',
+        [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'slide' => $slide,
+        ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+       //$this->layout='login';
+        if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
@@ -84,11 +96,6 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
