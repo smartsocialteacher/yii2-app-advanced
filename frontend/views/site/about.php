@@ -4,13 +4,14 @@
 
 use yii\helpers\Html;
 
-$this->title = 'About';
+$this->title = Yii::t('app','About');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>This is the About page. You may modify the following file to customize its content:</p>
+    <h4>โครงการวิจัย "การบูรณาการเทคโนโลยีสารสนเทศเพื่อการออกแบบและพัฒนานวัตกรรมการจัดการศึกษาของโรงเรียนเอกชนสอนศาสนาอิสลามในพื้นที่สามจังหวัดชายแดนภาคใต้ในศตวรรษที่ 21"</h4>
+    <p>คณะวิทยาการสื่อสาร มหาวิทยาลัยสงขลานครินทร์ วิทยาเขตปัตตานี อำเภอเมือง จังหวัดปัตตานี 94000</p>
+ <p>ต่อติดได้ที่ 083-030-2065</p>
 
-    <code><?= __FILE__ ?></code>
 </div>

@@ -1,53 +1,147 @@
 <?php
-
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\helpers\BaseStringHelper;
+
+$baseUrl = Yii::getAlias('@web');
+$basePath = Yii::getAlias('@webroot');
+
+$this->title = 'Smart & Social Teachers';
+
+use themes\multi\assets\ThemeAsset;
+
+$asset = ThemeAsset::register($this);
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
+<section id="blog" class="green">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class='col-sm-12'>
+<?= $this->render('_slide') ?> 
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
         </div>
-
     </div>
-</div>
+</section>
+
+
+
+<section id="blog" class="green">
+    <div class="container">       
+        <div class="row">        
+
+            <div class="col-sm-3">           
+                <?=
+                $this->render('_activity', [
+                    'activity_id' => '1',
+                    //'arts'=>$arts,
+                    'asset' => $asset,
+                    'baseUrl' => $baseUrl,
+                    'basePath' => $basePath,
+                ])
+                ?> 
+                 <?=
+                $this->render('_news', [
+                    'art_cate_id' => '3',
+                    'link'=>'project',
+                    'asset' => $asset,
+                    'baseUrl' => $baseUrl,
+                    'basePath' => $basePath,
+                ])
+                ?>    
+            </div> 
+            
+            <div class="col-sm-3">
+            <?=$this->render('_comment', [                   
+                    //'arts'=>$arts,
+                    'asset' => $asset,
+                    'baseUrl' => $baseUrl,
+                    'basePath' => $basePath,
+                ])
+                ?>             
+            </div> 
+            
+            <div class="col-sm-3">                
+                <?=
+                $this->render('_school', [                    
+                    //'arts'=>$arts,
+                    'asset' => $asset,
+                    'baseUrl' => $baseUrl,
+                    'basePath' => $basePath,
+                ])
+                ?>             
+            </div> 
+            
+            <div class="col-sm-3 green-gradient">
+
+<?=
+$this->render('_article', [
+    'art_cate_id' => '2',
+    'link'=>'article',
+    //'arts'=>$arts,
+    'asset' => $asset,
+    'baseUrl' => $baseUrl,
+    'basePath' => $basePath,
+])
+?> 
+
+                <hr />
+
+                <?=
+                $this->render('_article', [
+                    'art_cate_id' => '1',                    
+                    'link'=>'news',
+                    //'arts'=>$arts,
+                    'asset' => $asset,
+                    'baseUrl' => $baseUrl,
+                    'basePath' => $basePath,
+                ])
+                ?>
+
+                <hr />
+
+<?= $this->render('_link') ?>
+<?php /* = $this->render('_login') */ ?>
+            </div>
+
+        </div>
+
+</section>
+
+
+
+<?=
+$this->render('_research', [
+    //'arts'=>$arts,
+    'asset' => $asset,
+    'baseUrl' => $baseUrl,
+    'basePath' => $basePath
+        ]
+)
+?>
+
+
+
+
+
+<?php /*=
+$this->render('_commentSlide', [
+    //'arts'=>$arts,
+    'asset' => $asset,
+    'baseUrl' => $baseUrl,
+    'basePath' => $basePath
+        ]
+)*/
+?>
+
+<?=
+$this->render('_album', [
+    //'arts'=>$arts,
+    'asset' => $asset,
+    'baseUrl' => $baseUrl,
+    'basePath' => $basePath
+        ]
+)
+?>

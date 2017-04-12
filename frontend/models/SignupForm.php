@@ -1,8 +1,10 @@
 <?php
 namespace frontend\models;
 
+//use common\models\User;
+use common\models\TbUser;
 use yii\base\Model;
-use common\models\User;
+use Yii;
 
 /**
  * Signup form
@@ -12,7 +14,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
+    public $password_confirm;
 
     /**
      * @inheritdoc
@@ -20,19 +22,20 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'trim'],
+            ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\TbUser', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
-            ['email', 'trim'],
+            ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\TbUser', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
+            [['password','password_confirm'], 'required'],
             ['password', 'string', 'min' => 6],
+            [['password_confirm'], 'compare', 'compareAttribute' => 'password'],
         ];
     }
 
@@ -43,16 +46,22 @@ class SignupForm extends Model
      */
     public function signup()
     {
-        if (!$this->validate()) {
-            return null;
+        if ($this->validate()) {
+            $user = new TbUser();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            
+            $user->user_timecreate=date("Y-m-d H:i:s");
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            
+            if ($user->save()) {
+                return $user;
+            }else{
+                //print_r($user->getErrors());
+            }
         }
-        
-        $user = new User();
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        
-        return $user->save() ? $user : null;
+
+        return null;
     }
 }

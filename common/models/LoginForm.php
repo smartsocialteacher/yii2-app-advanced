@@ -42,16 +42,18 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            //print_r($user);
+            if (!$user||!$user->validatePassword($this->password)) {   
+               $this->addError($attribute, 'Incorrect username or password.');
             }
-        }
+        } 
     }
+    
 
     /**
      * Logs in a user using the provided username and password.
      *
-     * @return bool whether the user is logged in successfully
+     * @return boolean whether the user is logged in successfully
      */
     public function login()
     {
@@ -70,9 +72,43 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = TbUser::findByUsername($this->username);
         }
 
         return $this->_user;
     }
 }
+
+
+/*
+ * Array
+(
+    [status] => 1
+    [info] => Array
+        (
+            [cn] => 0026668-ahamad
+            [dn] => CN=0026668-ahamad,OU=D174,OU=F21,OU=C02,OU=Staffs,DC=psu,DC=ac,DC=th
+            [accountname] => ahamad.j
+            [personid] => 0026668
+            [citizenid] => 1949900097921
+            [campus] => วิทยาเขตปัตตานี
+            [campusid] => 02
+            [department] => สถาบันวัฒนธรรมศึกษากัลยาณิวัฒนา
+            [departmentid] => 174
+            [workdetail] => สถาบันวัฒนธรรมศึกษากัลยาณิวัฒนา
+            [positionid] => 956
+            [description] => อาฮาหมัด เจ๊ะดือราแม
+            [displayname] => AHAMAD JEHDEURAMEA
+            [detail] => พนักงานบริหารทั่วไป
+            [title] => นาย
+            [titleid] => 01
+            [firstname] => AHAMAD
+            [lastname] => JEHDEURAMEA
+            [sex] => M
+            [mail] => ahamad.j@psu.ac.th
+            [othermail] => ahamad.j@psu.ac.th
+        )
+
+)
+ * */
+ 

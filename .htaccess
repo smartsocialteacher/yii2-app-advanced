@@ -8,19 +8,22 @@ AddDefaultCharset utf-8
 
      RewriteCond %{REQUEST_URI} ^/(uploads)
      RewriteRule ^uploads/(.*)$ uploads/$1 [L]
+     
+     RewriteCond %{REQUEST_URI} ^/(images)
+     RewriteRule ^images/(.*)$ images/$1 [L]
 
      ##############################################
 
     # the main rewrite rule for the frontend application
-    RewriteCond %{REQUEST_URI} !^/(backend/web|office)
+    RewriteCond %{REQUEST_URI} !^/(backend/web|admin)
     RewriteRule !^frontend/web /frontend/web%{REQUEST_URI} [L]
 
     # redirect to the page without a trailing slash (uncomment if necessary)
     #RewriteCond %{REQUEST_URI} ^/office/$
     #RewriteRule ^(office)/ /$1 [L,R=301]
     # the main rewrite rule for the backend application
-    RewriteCond %{REQUEST_URI} ^/backend
-    RewriteRule ^backend(.*) /backend/web/$1 [L]
+    RewriteCond %{REQUEST_URI} ^/admin
+    RewriteRule ^admin(.*) /backend/web/$1 [L]
 
     # if a directory or a file of the frontend application exists, use the request directly
     RewriteCond %{REQUEST_URI} ^/frontend/web

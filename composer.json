@@ -17,7 +17,17 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.6",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0"
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        
+        "dektrium/yii2-user": "0.9.*@dev",
+        "2amigos/yii2-ckeditor-widget": "~1.0",
+        "iutbay/yii2-kcfinder": "*",
+        "kartik-v/yii2-widgets": "*",
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "2amigos/yii2-gallery-widget": "~1.0",
+        "yurkinx/yii2-image": "dev-master",
+        "mdmsoft/yii2-admin": "~2.0",
+        "dixonsatit/yii2-thai-year-formatter": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
